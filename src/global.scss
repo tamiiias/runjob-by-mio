@@ -1,0 +1,185 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+
+.ion-text-center {
+    text-align: center;
+}
+.inline-center{
+    display: block;
+    margin: 0 auto;
+}
+.no-left-padding {
+    padding-left: 0;
+}
+.right {
+    float: right;
+}
+.spin-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.page-content {
+  --padding-top: 20px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --background: var(--ion-color-light);
+}
+.input-item {
+  --padding-start: 0px;
+  --background: var(--ion-color-light);
+}
+.error-message {
+  color: var(--ion-color-danger);
+}
+
+.vertically-center-100-height{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100%;
+}
+
+a {
+	color: var(--ion-color-secondary);
+}
+
+.ion-accordion-toggle-icon{
+    color: var(--ion-color-primary)
+}
+
+ion-card-subtitle {
+	font-size: 12px;
+}
+
+.tab-has-icon ion-label, .tab-has-icon ion-label, .tab-has-icon ion-icon  {
+  color: var(--ion-color-secondary) !important; 
+}
+
+.tab-has-icon.tab-selected ion-label, .tab-has-icon.tab-selected ion-icon {
+    color: var(--ion-color-primary) !important; 
+}
+
+.alert-tappable.sc-ion-alert-md {
+	position: relative;
+	height: 107px;
+	overflow: hidden;
+} 
+.alert-checkbox-label {
+	white-space: normal !important;
+}
+.select_secteurs_label {
+	white-space: normal !important;
+}
+
+.input_wrapper {
+	position: relative;
+    width: 100%;
+    height: 100%;
+}
+#cv-file-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	opacity: 0;
+    z-index: 2;
+}
+.file-dummy {
+	position: absolute;
+	top: 20px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.file-dummy .success {
+    display: none;
+}
+.file-dummy .success.visible,
+.file-dummy .default.visible{
+    display: inline;
+}
+.file-dummy .success,
+.file-dummy .default{
+    display: none;
+}
+
+.recherche_en_cours_list {
+	padding-top: 0 !important;
+}
+    .recherche_en_cours_list ion-item {
+        border: 1px solid #dedede;
+        border-width: 1px 0 0;
+    }
+
+.offre_emploi_card h2 {
+    margin-bottom: 10px;
+}
+.offre_emploi_card label {
+    font-weight: bold;
+}
+.offre_emploi_card hr {
+  border-bottom: 1px solid #ccc;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.text-right {
+    text-align: right;
+}
+
+    
+app-offre-emploi .postule,
+.offre_emploi_card.postule,
+app-formation .postule,
+.formation_card.postule {
+	background-color: #fed6d3;
+}
+.item.item-trns {
+	border-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+	color: white; 
+}
+
+.icon_postule_wrapper {
+	margin-bottom: -42px;
+    background-color: transparent;
+    margin-top: -14px;
+    margin-right: -16px;
+}
+.icon_postule_wrapper::part(native) {
+    background-color: transparent;
+}
+
+ion-router-link{
+    text-decoration: underline;
+}

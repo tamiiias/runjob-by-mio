@@ -1,0 +1,44 @@
+<ion-grid class="ion-padding">
+  <ion-row>
+    <ion-col>
+      <div>
+        Tu trouveras ci-dessous les offres d'emploi correspondant à tes secteurs d'activité.  
+      </div>
+    </ion-col>
+    <ion-col size="2">
+      <div>
+        <ion-button id="info-secteur-button-ofrre-emploi"><ion-icon name="help-circle-outline"></ion-icon></ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-popover trigger="info-secteur-button-ofrre-emploi" triggerAction="click" arrow=true>
+  <ng-template>
+    <ion-content class="ion-padding">Tu peux modifier tes secteurs d'activité, dans la section <ion-router-link href="/tabs/tab4">Profil > Mes secteurs d'activités</ion-router-link></ion-content>
+  </ng-template>
+</ion-popover>
+
+
+
+<div *ngIf="offresEmploi$ | async as offreEmploi; else loading">
+
+    <app-offre-emploi *ngFor="let offreEmploi of offresEmploi$ | async" [offreEmploi]="offreEmploi"></app-offre-emploi>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="getMorePosts($event)" [disabled]="infiniteScrollDisabled()">
+        <ion-infinite-scroll-content loadingSpinner="lines">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <div *ngIf="offreEmploi.length; else noresults">
+    </div>
+    <ng-template #noresults>
+        <ion-item>
+            <p>Il n'y aucune offre d'emploi en lien avec ton ou tes secteurs d'activité. N'hésite pas à élargir ta recherche en modifiant tes secteurs depuis la section <ion-router-link href="/tabs/tab4">Profil > Mes secteurs d'activités</ion-router-link></p>
+        </ion-item>
+    </ng-template>
+</div>
+
+<ng-template #loading>
+    <p class="ion-text-center" style="margin-top: 40px;" >
+        <ion-spinner name="lines" ></ion-spinner>    
+    </p>
+</ng-template>

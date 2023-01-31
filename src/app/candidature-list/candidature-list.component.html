@@ -1,0 +1,18 @@
+<div *ngIf="candidatures$ | async as candidature; else loading">
+    
+    <app-candidature *ngFor="let candidature of candidatures$ | async" [candidature]="candidature"></app-candidature>
+    
+    <div *ngIf="candidature.length; else noresults">
+    </div>    
+    <ng-template #noresults>
+        <ion-item>
+            <p>Tu n'as postulé à aucune offre d'emploi ou formation pour le moment.</p>
+        </ion-item>
+    </ng-template>        
+</div>
+
+<ng-template #loading>
+    <p class="ion-text-center" style="margin-top: 40px;" >
+        <ion-spinner name="lines" ></ion-spinner>    
+    </p>
+</ng-template>    

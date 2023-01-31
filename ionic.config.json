@@ -1,0 +1,7 @@
+{
+  "name": "RunJob",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

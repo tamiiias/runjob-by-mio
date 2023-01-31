@@ -1,0 +1,161 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title color="primary">
+      MON PROFIL
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mon Profil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ng-container *ngIf="user">
+    <ion-text color="secondary">
+      <h2 class="ion-padding">{{user.firstname}} {{user.lastname}}</h2>
+    </ion-text>
+  </ng-container>    
+
+    
+  <ion-accordion-group>
+      <ion-accordion value="informations">
+        <ion-item slot="header">
+            <ion-label>Mes informations personnelles</ion-label>
+        </ion-item>  
+        <form slot="content" *ngIf="user" [formGroup]="updateUserForm" (ngSubmit)="submitUpdateUserForm()" novalidate autocomplete="off">
+            <ion-item lines="full" hidden>
+              <ion-input formControlName="user_id" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Prénom</ion-label>
+              <ion-input formControlName="prenom" type="text" required></ion-input>
+            </ion-item>  
+            <ion-item lines="full">
+              <ion-label position="floating">Nom</ion-label>
+              <ion-input formControlName="nom" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input formControlName="email" type="email" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Confirmer l'email</ion-label>
+              <ion-input formControlName="email_confirm" type="email" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Nom d'utilisateur</ion-label>
+              <ion-input formControlName="username" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Téléphone</ion-label>
+              <ion-input formControlName="telephone" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Code Postal</ion-label>
+              <ion-input formControlName="code_postal" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+                <ion-label class="ion-text-wrap">Je suis déjà inscrit à la Mission Locale</ion-label>
+                <ion-checkbox formControlName="inscrit_mission_locale" slot="start" (ionChange)="handleChangeInscritMissionLocale($event)"></ion-checkbox>
+            </ion-item>
+            <ion-item lines="full" id="nom_conseiller_item" [hidden]=is_conseiller_hidden>
+              <ion-label position="floating">Nom de mon conseiller</ion-label>
+              <ion-input formControlName="conseiller" type="text"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+                <ion-label>Je recherche</ion-label>
+                <ion-select multiple="true" cancelText="Annuler" okText="OK" formControlName="emploi_formation" >
+                    <ion-select-option value="emploi" checked>Emploi</ion-select-option>
+                    <ion-select-option value="formation" checked>Formation</ion-select-option>
+                </ion-select>
+            </ion-item> 
+            
+            <ion-item lines="full" *ngIf="errorMessage">
+                <p class="error-message">{{errorMessage}}</p>
+            </ion-item>  
+
+
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button type="submit"  [disabled]="!updateUserForm.valid" >Enregistrer</ion-button>
+              </ion-col>
+            </ion-row>
+        </form>
+      </ion-accordion>
+      <ion-accordion value="secteurs">
+        <ion-item slot="header">
+            <ion-label>Mes secteurs d'activité</ion-label>
+        </ion-item>  
+        <form id="updateSecteursForm" slot="content" *ngIf="user" [formGroup]="updateSecteursForm" (ngSubmit)="submitSecteursForm()" novalidate autocomplete="off">
+            <ion-item lines="full" hidden>
+              <ion-input formControlName="user_id" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+                <!--<ion-label>Secteur(s) d'activité</ion-label>-->
+                <ion-select multiple="true" cancelText="Annuler" okText="OK" formControlName="secteur_activite" placeholder="Sélectionner mes secteurs d'activité" (ionChange)="handleChangeSecteurs($event)">
+                    <ng-container *ngFor="let secteurActivite of secteursActivite$ | async" >
+                        <ion-select-option value="{{ secteurActivite.id }}" checked>{{ secteurActivite.name }}</ion-select-option>
+                    </ng-container>
+                </ion-select>
+            </ion-item>      
+
+            <ion-item lines="full" *ngIf="errorMessage">
+                <p class="error-message">{{errorMessage}}</p>
+            </ion-item>  
+
+
+            <ion-row hidden>
+              <ion-col class="ion-text-center">
+                <ion-button id="updateSecteursForm_submit" type="submit"  [disabled]="!updateUserForm.valid" >Enregistrer</ion-button>
+              </ion-col>
+            </ion-row>
+        </form>
+      </ion-accordion>
+      
+      <!--
+      <ion-accordion value="candidatures">
+        <ion-item slot="header">
+          <ion-label>Mes candidatures</ion-label>
+        </ion-item>
+        <ion-list slot="content">  
+
+            <app-candidature-list></app-candidature-list>  
+        </ion-list>    
+      </ion-accordion>
+      -->
+  </ion-accordion-group>      
+    
+  <ion-list class="recherche_en_cours_list">
+    <form id="updateRechercheEnCoursForm" [formGroup]="updateRechercheEnCoursForm" (ngSubmit)="submitRechercheEnCoursForm()">
+      <ion-item lines="full" hidden>
+        <ion-input formControlName="user_id" type="text" required></ion-input>
+      </ion-item>
+            
+      <ion-item lines="full">
+        <ion-label>Recherche en cours</ion-label>
+        <ion-toggle formControlName="recherche_en_cours" slot="end" [(ngModel)]="toggleStatus" [checked]="true" (ionChange)="handleChangeRechercheEnCours($event)"></ion-toggle>
+      </ion-item>
+      
+      <ion-row hidden>
+        <ion-col class="ion-text-center">
+            <ion-button id="updateRechercheEnCoursForm_submit" type="submit" >Enregistrer</ion-button>
+        </ion-col>
+      </ion-row>    
+          
+    </form>
+  </ion-list>
+    
+  <br>
+  <ion-content class="ion-padding">    
+      <ion-button *ngIf="(loggedInObservable | async) === false" [routerLink]="['/login']" color="secondary">Se connecter
+      </ion-button>
+      <ion-button *ngIf="(loggedInObservable | async) === true" (click)="logOut()" color="secondary">Se déconnecter
+      </ion-button>
+  </ion-content>
+
+    
+  
+</ion-content>

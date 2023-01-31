@@ -1,0 +1,29 @@
+<ion-content class="page-content">
+  
+  <ion-text color="secondary">
+    <h2>Se connecter</h2>
+  </ion-text>
+
+  <form class="login-form" [formGroup]="loginForm" (submit)="doLogin()">
+    <ion-item class="input-item">
+      <ion-label color="secondary" position="stacked">Nom d'utilisateur</ion-label>
+      <ion-input type="text" formControlName="username" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label color="secondary" position="stacked">Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password" clearInput="true"></ion-input>
+    </ion-item>
+
+    <p class="error-message" *ngIf="errorMessage">{{errorMessage}}</p>
+
+    <p class="sign-up">
+      <a [routerLink]="['/register']" color="secondary">Pas encore de compte ?</a>
+    </p>
+    <p class="sign-up">
+      <a color="secondary" (click)="openPwReset()">Mot de passe oublié ?</a>      
+    </p>  
+
+    <ion-button color="secondary" class="submit-btn" expand="block" [disabled]="!loginForm.valid" type="submit" strong="true">Connexion</ion-button>
+  </form>
+</ion-content>

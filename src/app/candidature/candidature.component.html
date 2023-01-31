@@ -1,0 +1,14 @@
+<ion-card>
+  <!--<img src="{{ candidature.parentPostImage }}" />-->    
+  <ion-card-header>
+    <ion-card-subtitle>Candidature postée le {{ candidature.date | date: 'd MMMM yyyy' }}</ion-card-subtitle>
+    <ion-card-title color="primary" [innerHTML]="candidature.parentPostTitle"></ion-card-title>
+    <ion-button *ngIf="candidature['toolset-meta']['details-candidature']['cv'].raw" href="{{ candidature['toolset-meta']['details-candidature']['cv'].raw }}">Voir mon CV</ion-button>  
+    
+    <br>  
+    <ion-button *ngIf="candidature.parentPostId && candidature.parentPostType=='offre-emploi'" href="/tabs/offres-emploi/single/{{candidature.parentPostId}}" color="secondary">Voir l'offre d'emploi</ion-button>    
+    <ion-button *ngIf="candidature.parentPostId && candidature.parentPostType=='formation'"  href="/tabs/formations/single/{{candidature.parentPostId}}" color="secondary">Voir la formation</ion-button>      
+  </ion-card-header>
+</ion-card>
+
+

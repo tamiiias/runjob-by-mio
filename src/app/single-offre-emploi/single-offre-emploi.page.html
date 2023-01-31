@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Offre d'emploi</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/offres-emploi"></ion-back-button>
+      </ion-buttons>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngIf="offreEmploi$ | async as offreEmploi; else elseBlock" class="offre_emploi_card">
+      <!--
+      <img src="{{ offreEmploi._embedded['wp:featuredmedia']['0'].source_url }}" />     
+      -->
+      <ion-card-header>
+        
+        <ion-item *ngIf="offreEmploi.postule" class="icon_postule_wrapper" lines="none">
+          <ion-icon size="large" name="paper-plane-outline" color="primary" slot="end"></ion-icon>
+        </ion-item>    
+        <ion-card-subtitle>Offre publiée le {{ offreEmploi.date | date: 'd MMMM yyyy' }}</ion-card-subtitle>
+        <ion-card-title color="primary" [innerHTML]="offreEmploi.title.rendered"></ion-card-title>
+          
+      </ion-card-header>
+
+      <ion-card-content>
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['lieu-travail'].raw"><ion-icon name="location-outline"></ion-icon> <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['lieu-travail'].raw }}</span></p>
+          
+        
+        <hr>
+        <ion-text color="primary">
+          <h2>Détails du contrat</h2>
+        </ion-text>  
+        
+          
+        <p *ngIf="offreEmploi['type-contrat-name']"><label>Type de contrat</label> : <span>{{ offreEmploi['type-contrat-name'] }}</span></p>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['duree-contrat'].raw"><label>Durée du contrat</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['duree-contrat'].raw }}</span></p>
+          
+        <p *ngIf="offreEmploi['etat-name']"><label>État</label> : <span>{{ offreEmploi['etat-name'] }}</span></p>
+        
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['duree-travail-hebdomadaire'].raw"><label>Durée de travail hebdomadaire</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['duree-travail-hebdomadaire'].raw }}h</span></p>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['amplitude-horaire'].raw"><label>Amplitude horaire</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['amplitude-horaire'].raw }}</span></p>
+          
+        
+        
+        
+          
+        <div *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['lieu-formation'].raw">
+            
+            <hr>
+            <ion-text color="primary">
+              <h2>Détails de la formation</h2>
+            </ion-text> 
+            
+            
+            <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['lieu-formation'].raw"><ion-icon name="location-outline"></ion-icon> <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['lieu-formation'].raw }}</span></p>      
+            
+            <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['formation-preparee'].raw"><label>Formation préparée</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['formation-preparee'].raw }}</span></p>
+            
+            <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['niveau-diplome-prepare'].raw"><label>Niveau et diplôme préparé</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['niveau-diplome-prepare'].raw }}</span></p>
+            
+            
+            
+        </div>
+          
+        <hr>  
+        <ion-text color="primary">
+          <h2>Description du poste</h2> 
+        </ion-text>   
+         
+        
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['missions'].raw"><label>Missions</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['missions'].raw }}</span></p>  
+          
+          
+        <hr>  
+        <ion-text color="primary">
+          <h2>Qualifications</h2>
+        </ion-text>   
+        
+        
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['formation-diplome-demande'].raw"><label>Formation / Diplôme demandés</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['formation-diplome-demande'].raw }}</span></p>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['experience'].raw"><label>Expérience</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['experience'].raw }}</span></p>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['permis'].raw"><label>Permis</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['permis'].raw }}</span></p>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['moyen-locomotion'].raw"><label>Moyen de locomotion</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['moyen-locomotion'].raw }}</span></p>
+        
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['savoir'].raw"><label>Savoir</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['savoir'].raw }}</span></p>
+        <br>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['savoir-etre'].raw"><label>Savoir être</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['savoir-etre'].raw }}</span></p>
+        <br>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['savoir-faire'].raw"><label>Savoir faire</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['savoir-faire'].raw }}</span></p>
+        <br>
+          
+        <p *ngIf="offreEmploi['toolset-meta']['details-offre-demploi']['infos-complementaires-commentaire'].raw"><label>Infos complémentaires / Commentaire</label> : <span>{{ offreEmploi['toolset-meta']['details-offre-demploi']['infos-complementaires-commentaire'].raw }}</span></p>  
+          
+          
+          
+          
+        <br> 
+        <p [innerHTML]="offreEmploi.content.rendered"></p>  
+        
+        <div style="display: inline-block; width: 100%;">
+            <ion-button color="primary" (click)="onViewPostulerOffreEmploi()" class="right" [disabled]="offreEmploi['etat-name'] !== 'Candidatures en cours' || offreEmploi.postule=='postule'">
+              <ion-icon name="paper-plane-outline" style="color:white;"></ion-icon>&nbsp;Postuler
+            </ion-button>
+        </div>  
+        <ion-text *ngIf="offreEmploi.postule !== 'postule' && offreEmploi['etat-name'] !== 'Candidatures en cours'" class="ion-text-end" color="primary">
+            <p>Les candidatures sont terminées, vous ne pouvez plus postuler à cette offre d'emploi.</p>
+            <p>{{offreEmploi.postule}}</p>
+        </ion-text>    
+        <ion-text *ngIf="offreEmploi.postule == 'postule'" class="ion-text-end" color="primary">
+            <p>Tu as déjà postulé à cette offre d'emploi. Retrouve toutes tes candidatures dans <ion-router-link href="/tabs/candidatures">l'onglet Candidatures</ion-router-link>.</p>
+        </ion-text>      
+            
+        
+        <br><br>
+      </ion-card-content>
+    </ion-card>
+    <ng-template #elseBlock>
+        <div class="spin-wrapper">
+            <ion-spinner color="primary"></ion-spinner>
+        </div>    
+    </ng-template>
+</ion-content>

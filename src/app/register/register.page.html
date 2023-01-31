@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/login" text="Retour"></ion-back-button>
+    </ion-buttons>  
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-content">
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item lines="full">
+          <ion-label position="floating">Prénom*</ion-label>
+          <ion-input formControlName="prenom" type="text" required></ion-input>
+        </ion-item>  
+        <ion-item lines="full">
+          <ion-label position="floating">Nom*</ion-label>
+          <ion-input formControlName="nom" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Email*</ion-label>
+          <ion-input formControlName="email" type="email" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Confirmer l'email*</ion-label>
+          <ion-input formControlName="email_confirm" type="email" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Nom d'utilisateur*</ion-label>
+          <ion-input formControlName="username" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Mot de passe*</ion-label>
+          <ion-input formControlName="password" type="password" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Confirmer le mot de passe*</ion-label>
+          <ion-input formControlName="password_confirm" type="password" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Téléphone*</ion-label>
+          <ion-input formControlName="telephone" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Code Postal*</ion-label>
+          <ion-input formControlName="code_postal" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+            <ion-label class="ion-text-wrap">Je suis déjà inscrit à la Mission Locale</ion-label>
+            <ion-checkbox formControlName="inscrit_mission_locale" slot="start" (ionChange)="handleChangeInscritMissionLocale($event)"></ion-checkbox>
+        </ion-item>
+        <ion-item lines="full" id="nom_conseiller_item" [hidden]=is_conseiller_hidden>
+          <ion-label position="floating">Nom de mon conseiller</ion-label>
+          <ion-input formControlName="conseiller" type="text"></ion-input>
+        </ion-item>
+        
+        <ion-item lines="full">
+            <ion-label class="select_secteurs_label">Mon projet professionnel, dans quel(s) domaine(s) ?</ion-label>
+            <ion-select multiple="true" cancelText="Annuler" okText="OK" formControlName="secteur_activite" >
+                <ng-container *ngFor="let secteurActivite of secteursActivite$ | async" >
+                    <ion-select-option value="{{ secteurActivite.id }}" checked>{{ secteurActivite.name }}</ion-select-option>
+                </ng-container>
+            </ion-select>
+        </ion-item> 
+        
+        <ion-item lines="full" class="select_secteurs">
+            <ion-label>Je recherche</ion-label>
+            <ion-select multiple="true" cancelText="Annuler" okText="OK" formControlName="emploi_formation" >
+                <ng-container>
+                    <ion-select-option value="emploi" checked>Un emploi</ion-select-option>
+                    <ion-select-option value="formation" checked>Une formation</ion-select-option>
+                </ng-container>
+            </ion-select>
+        </ion-item> 
+        
+        <p>La Mission Locale Intercommunale (MIO) traite les données recueillies pour vous informer lorsque de nouvelles offres d'emploi ou de formation correspondantes à vos secteurs d'activité sont publiées ainsi que pour vous contacter lorsque vous avez postulé à une offre. Pour en savoir plus sur la gestion de vos données personnelles et pour exercer vos droits, consultez notre <ion-router-link href="#" onclick="window.open('http://lab.airlab.fr/runjob/politique-de-confidentialite', '_system', 'location=yes'); return false;">politique de confidentialité</ion-router-link>.</p>
+        
+        <ion-item lines="full">
+            <ion-label class="ion-text-wrap">J'accepte la politique de confidentialité</ion-label>
+            <ion-checkbox formControlName="accept_politique_confidentialite" slot="start" ></ion-checkbox>
+        </ion-item>
+        
+        <p class="error-message" *ngIf="errorMessage">{{errorMessage}}</p>
+        
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" expand="block" [disabled]="!registerForm.valid" >Inscription</ion-button>
+          </ion-col>
+        </ion-row>
+    </form>
+
+</ion-content>

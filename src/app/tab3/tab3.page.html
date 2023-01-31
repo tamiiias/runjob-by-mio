@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="" color="primary">
+      MES CANDIDATURES
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="ion-text-center">Candidatures</ion-title>
+    </ion-toolbar>
+  </ion-header>  
+    
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>    
+    
+  <app-candidature-list></app-candidature-list>   
+    
+    
+</ion-content>

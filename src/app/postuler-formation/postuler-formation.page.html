@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Postuler à la formation</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/formations"></ion-back-button>
+      </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    
+    <ion-text class="ion-text-center" color="primary" *ngIf="formation$ | async as formation;"><h2 [innerHTML]="formation.title.rendered"></h2></ion-text>
+    
+    <div class="ion-padding">
+        <ion-text class="ion-text-center" color="" *ngIf="formation$ | async as formation;">Vérifier mes informations avant de postuler</ion-text>
+    </div>
+    
+    
+  
+    <form [formGroup]="postulerFormationForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item lines="full" hidden>
+          <ion-input formControlName="parent_id" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full" hidden>
+          <ion-input formControlName="relationship" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Nom</ion-label>
+          <ion-input formControlName="nom" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Prénom</ion-label>
+          <ion-input formControlName="prenom" type="text" required></ion-input>
+        </ion-item>  
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Téléphone</ion-label>
+          <ion-input formControlName="telephone" type="text" required></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" expand="block">Envoyer</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+</ion-content>
+
